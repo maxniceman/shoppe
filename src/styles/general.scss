@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: Roboto;
 }
 
@@ -13,4 +14,8 @@ body,
 #root {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 1248px;
+  min-width: 1248px;
+  margin: 0 auto;
 }

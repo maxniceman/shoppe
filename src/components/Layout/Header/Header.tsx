@@ -5,7 +5,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import styles from "./Header.module.scss";
 
-import logo from "../../media/logo.svg";
+import logo from "../../../media/logo.svg";
 
 const Header = () => {
   return (
