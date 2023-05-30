@@ -1,16 +1,7 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import ProductItem from "../ProductItem/ProductItem";
 
-interface IProducts {
-  products: IProduct[];
-}
-
-interface IProduct {
-  id: number;
-  name: string;
-  price: string | number;
-  img: string;
-}
+import { IProduct, IProducts } from "./types";
 
 const ProductList = ({ products }: IProducts) => {
   return (
