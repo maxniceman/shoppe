@@ -1,5 +1,11 @@
+import ProductList from "./ProductList/ProductList";
+
+import data from "../../mocks/mock-data";
+
 const ShopPage = () => {
-  return <h1>Products</h1>;
+  const products = data.items;
+
+  return <ProductList products={products} />;
 };
 
 export default ShopPage;
