@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../components/Layout/Layout";
@@ -24,6 +23,7 @@ const router = createBrowserRouter([
         element: <ErrorPage />,
       },
       {
+        errorElement: <ErrorPage />,
         path: "products/:productId",
         element: <ProductPage />,
         loader: productLoader,

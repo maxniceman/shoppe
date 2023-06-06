@@ -9,7 +9,7 @@ const ProductItem = (props: Product) => {
   const { title, image, id, price } = props;
 
   return (
-    <Grid2 xs={4}>
+    <Grid2 xs={12} sm={6} md={4}>
       <div className={styles["product-item"]}>
         <div className={styles["img-box"]}>
           <img src={image} alt={title}></img>
