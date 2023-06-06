@@ -8,7 +8,7 @@ import styles from "./ProductList.module.scss";
 const ProductList = ({ products }: Products) => {
   return (
     <div className={styles["products-list"]}>
-      <Grid2 container spacing={7}>
+      <Grid2 container spacing={6}>
         {products.map((product: Product) => (
           <ProductItem key={product.id} {...product} />
         ))}
