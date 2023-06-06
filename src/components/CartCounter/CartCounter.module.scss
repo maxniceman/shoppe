@@ -1,0 +1,15 @@
+.cart-counter {
+  background: #efefef;
+  border-radius: 4px;
+  text-align: center;
+
+  .amount {
+    line-height: 36px;
+  }
+
+  .button {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+  }
+}

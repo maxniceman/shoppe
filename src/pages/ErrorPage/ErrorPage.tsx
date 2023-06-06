@@ -11,7 +11,7 @@ const ErrorPage = () => {
         <br />
         back to home and start again
       </p>
-      <Button href="/ " variant="outlined" color="info">
+      <Button href="/ " variant="outlined">
         HOMEPAGE
       </Button>
     </div>

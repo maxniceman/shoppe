@@ -10,7 +10,7 @@ const data = {
   items: [
     {
       id: 1,
-      title: "Product title",
+      title: "Product title 1",
       description:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ",
       price: 10000,
@@ -19,7 +19,7 @@ const data = {
     },
     {
       id: 2,
-      title: "Product title",
+      title: "Product title 2",
       description:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ",
       price: 10000,
@@ -28,7 +28,7 @@ const data = {
     },
     {
       id: 3,
-      title: "Product title",
+      title: "Product title 3",
       description:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ",
       price: 8999,
@@ -37,7 +37,7 @@ const data = {
     },
     {
       id: 4,
-      title: "Product title",
+      title: "Product title 4",
       description:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ",
       price: 1000,
@@ -46,7 +46,7 @@ const data = {
     },
     {
       id: 5,
-      title: "Product title",
+      title: "Product title 5",
       description:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. ",
       price: 500,
