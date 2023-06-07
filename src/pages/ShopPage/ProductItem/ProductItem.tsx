@@ -1,6 +1,6 @@
 import { Visibility, ShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
-import Grid2 from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Unstable_Grid2";
 
 import styles from "./ProductItem.module.scss";
 import { Product } from "../../types";
@@ -9,7 +9,7 @@ const ProductItem = (props: Product) => {
   const { title, image, id, price } = props;
 
   return (
-    <Grid2 xs={12} sm={6} md={4}>
+    <Grid xs={12} sm={6} md={4}>
       <div className={styles["product-item"]}>
         <div className={styles["img-box"]}>
           <img src={image} alt={title}></img>
@@ -28,7 +28,7 @@ const ProductItem = (props: Product) => {
         <p>{title}</p>
         <strong className={styles.price}>$ {price / 100}</strong>
       </div>
-    </Grid2>
+    </Grid>
   );
 };
 
