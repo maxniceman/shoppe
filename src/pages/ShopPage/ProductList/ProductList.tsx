@@ -1,22 +1,16 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import ProductItem from "../ProductItem/ProductItem";
 
-import { Products, Product } from "./types";
+import { Products, Product } from "../../types";
+
+import styles from "./ProductList.module.scss";
 
 const ProductList = ({ products }: Products) => {
   return (
-    <div>
+    <div className={styles["products-list"]}>
       <Grid container spacing={6}>
-        {products.map((p: Product) => (
-          <Grid key={p.id} xs={12} sm={6} md={4}>
-            <ProductItem
-              id={p.id}
-              title={p.title}
-              price={p.price}
-              image={p.image}
-              category={p.category}
-            />
-          </Grid>
+        {products.map((product: Product) => (
+          <ProductItem key={product.id} {...product} />
         ))}
       </Grid>
     </div>

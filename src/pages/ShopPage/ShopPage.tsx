@@ -1,10 +1,15 @@
 import ProductList from "./ProductList/ProductList";
+import { useLoaderData } from "react-router";
+import { getProducts } from "../service";
 
-import data from "../../mocks/mock-data";
+import { Product } from "../types";
+
+export const loader = () => {
+  return getProducts();
+};
 
 const ShopPage = () => {
-  const products = data.items;
-
+  const products = useLoaderData() as Product[];
   return <ProductList products={products} />;
 };
 

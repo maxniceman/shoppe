@@ -8,4 +8,5 @@ export interface Product {
   price: number;
   image: string;
   category: string;
+  description: string;
 }
