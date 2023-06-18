@@ -11,7 +11,7 @@ import {
   ActionIncreaseAmount,
   ActionDecreaseAmount,
 } from "./types";
-import { СartReducer } from "./CartReducer";
+import { cartReducer } from "./cartReducer";
 
 export const initialCart: [] = [];
 export const CartContext = createContext<CartProduct[] | []>([]);
@@ -20,7 +20,7 @@ export const CartDispatchContext = createContext<React.Dispatch<
 > | null>(null);
 
 export const CartProvider = ({ children }: PropsWithChildren) => {
-  const [cart, dispatch] = useReducer(СartReducer, initialCart);
+  const [cart, dispatch] = useReducer(cartReducer, initialCart);
 
   return (
     <CartContext.Provider value={cart}>

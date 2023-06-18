@@ -10,15 +10,17 @@ import { ActionType } from "../../pages/CartPage/types";
 
 import styles from "./CartCounter.module.scss";
 
+interface CartCounterInterface {
+  id: number;
+  amount: number;
+  setAmountBeforeAddToCart?: React.Dispatch<React.SetStateAction<number>>;
+}
+
 const CartCounter = ({
   id,
   amount,
   setAmountBeforeAddToCart,
-}: {
-  id: number;
-  amount: number;
-  setAmountBeforeAddToCart?: React.Dispatch<React.SetStateAction<number>>;
-}) => {
+}: CartCounterInterface) => {
   const cart = useCart();
   const dispatch = useCartDispatch();
   const [innerAmount, _] = useState(amount);

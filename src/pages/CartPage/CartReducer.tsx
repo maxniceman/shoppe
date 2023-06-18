@@ -7,7 +7,7 @@ import {
   ActionDecreaseAmount,
 } from "./types";
 
-export const СartReducer = (
+export const cartReducer = (
   cart: CartProduct[],
   action: ActionAdd | ActionRemove | ActionIncreaseAmount | ActionDecreaseAmount
 ) => {
