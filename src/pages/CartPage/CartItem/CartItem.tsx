@@ -3,22 +3,14 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import CartCounter from "../../../components/CartCounter/CartCounter";
-import { useCartDispatch } from "../CartContext";
-import { CartProduct, ActionType } from "../types";
+import { useCart } from "../CartContext";
+import { CartProduct } from "../types";
 
 import styles from "./CartItem.module.scss";
 
 const CartItem = (product: CartProduct) => {
   const { id, title, image, price, amount } = product;
-  const dispatch = useCartDispatch();
-
-  const removeProduct = () => {
-    if (!dispatch) return;
-    dispatch({
-      type: ActionType.remove,
-      payload: { id },
-    });
-  };
+  const { removeItem } = useCart();
 
   return (
     <li className={styles["cart-item"]}>
@@ -41,7 +33,7 @@ const CartItem = (product: CartProduct) => {
           justifyContent="flex-end"
           alignItems="flex-start"
         >
-          <IconButton onClick={removeProduct}>
+          <IconButton onClick={() => removeItem(id)}>
             <Close />
           </IconButton>
         </Grid>

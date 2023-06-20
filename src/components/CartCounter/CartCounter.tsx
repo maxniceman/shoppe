@@ -1,12 +1,10 @@
-// ts-nocheck
 import { useState } from "react";
 
 import Grid from "@mui/material/Unstable_Grid2";
 import { IconButton } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 
-import { useCart, useCartDispatch } from "../../pages/CartPage/CartContext";
-import { ActionType } from "../../pages/CartPage/types";
+import { useCart } from "../../pages/CartPage/CartContext";
 
 import styles from "./CartCounter.module.scss";
 
@@ -21,19 +19,15 @@ const CartCounter = ({
   amount,
   setAmountBeforeAddToCart,
 }: CartCounterInterface) => {
-  const cart = useCart();
-  const dispatch = useCartDispatch();
+  const { cart, increaseAmount, decreaseAmount } = useCart();
+
   const [innerAmount, _] = useState(amount);
   const isProductInCart = !!cart.find((product) => product.id === id);
 
   const incAmountPayload = () => {
-    if (!dispatch) return;
-    dispatch({
-      type: ActionType.increaseAmount,
-      payload: {
-        id,
-        amount: isProductInCart ? amount : innerAmount,
-      },
+    increaseAmount({
+      id,
+      amount: isProductInCart ? amount : innerAmount,
     });
   };
 
@@ -42,13 +36,9 @@ const CartCounter = ({
   };
 
   const decAmountPayload = () => {
-    if (!dispatch) return;
-    dispatch({
-      type: ActionType.decreaseAmount,
-      payload: {
-        id,
-        amount: isProductInCart ? amount : innerAmount,
-      },
+    decreaseAmount({
+      id,
+      amount: isProductInCart ? amount : innerAmount,
     });
   };
 

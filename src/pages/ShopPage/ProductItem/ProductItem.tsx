@@ -3,30 +3,23 @@ import { Visibility, ShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Unstable_Grid2";
 
-import { useCartDispatch } from "../../CartPage/CartContext";
+import { useCart } from "../../CartPage/CartContext";
 
 import styles from "./ProductItem.module.scss";
 import { Product } from "../../types";
-import { ActionType } from "../../CartPage/types";
 
 const ProductItem = (props: Product) => {
   const { title, image, id, price } = props;
-  const dispatch = useCartDispatch();
+  const { addItem } = useCart();
   const navigate = useNavigate();
 
-  function addProduct() {
-    if (!dispatch) return;
-    dispatch({
-      type: ActionType.add,
-      payload: {
-        id,
-        price,
-        title,
-        image,
-        amount: 1,
-      },
-    });
-  }
+  const item = {
+    id,
+    price,
+    title,
+    image,
+    amount: 1,
+  };
 
   return (
     <>
@@ -35,7 +28,7 @@ const ProductItem = (props: Product) => {
           <div className={styles["img-box"]}>
             <img src={image} alt={title}></img>
             <div className={styles.actions}>
-              <IconButton onClick={addProduct}>
+              <IconButton onClick={() => addItem(item)}>
                 <ShoppingCart />
               </IconButton>
               <IconButton

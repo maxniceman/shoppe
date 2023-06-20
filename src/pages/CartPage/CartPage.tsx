@@ -5,7 +5,8 @@ import { useCart } from "./CartContext";
 import styles from "./CartPage.module.scss";
 
 const CartPage = () => {
-  const cart = useCart();
+  const { cart } = useCart();
+
   return (
     <div className={styles["cart-page"]}>
       <h1>Shopping Cart</h1>

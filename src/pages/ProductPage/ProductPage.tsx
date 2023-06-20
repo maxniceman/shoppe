@@ -7,12 +7,11 @@ import Button from "@mui/material/Button";
 import CartCounter from "../../components/CartCounter/CartCounter";
 import { useLoaderData } from "react-router";
 import { getProduct } from "../service";
-import { useCart, useCartDispatch } from "../CartPage/CartContext";
+import { useCart } from "../CartPage/CartContext";
 
 import styles from "./ProductPage.module.scss";
 
 import { Product } from "../types";
-import { ActionType } from "../CartPage/types";
 
 export const loader: LoaderFunction = async ({ params }) => {
   if (!params.productId) throw new Error();
@@ -21,8 +20,8 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 const ProductPage = () => {
   const { id, image, title, price, description } = useLoaderData() as Product;
-  const dispatch = useCartDispatch();
-  const cart = useCart();
+
+  const { cart, addItem } = useCart();
   const isProductInCart = !!cart.find((product) => product.id === id);
   const productInCart = cart.find((product) => product.id === id);
   const [initialAmount, setInitialAmount] = useState(1);
@@ -32,16 +31,12 @@ const ProductPage = () => {
     : initialAmount;
 
   const addToCart = () => {
-    if (!dispatch) return;
-    dispatch({
-      type: ActionType.add,
-      payload: {
-        id,
-        price,
-        title,
-        image,
-        amount: amount || initialAmount,
-      },
+    addItem({
+      id,
+      price,
+      title,
+      image,
+      amount: amount || initialAmount,
     });
   };
 

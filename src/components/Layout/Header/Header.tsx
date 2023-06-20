@@ -16,7 +16,7 @@ import logo from "../../../assets/logo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
-  const cart = useCart();
+  const { cart } = useCart();
 
   return (
     <header className={styles.header}>
