@@ -12,17 +12,17 @@ export const cartReducer = (
   action: ActionAdd | ActionRemove | ActionIncreaseAmount | ActionDecreaseAmount
 ) => {
   switch (action.type) {
-    case ActionType.add: {
-      if (cart.find((p: CartProduct) => p.id === action.payload.id)) {
+    case ActionType.ADD: {
+      if (cart.some((p: CartProduct) => p.id === action.payload.id)) {
         return cart;
       } else {
         return [...cart, action.payload];
       }
     }
-    case ActionType.remove: {
+    case ActionType.REMOVE: {
       return cart.filter((p: CartProduct) => p.id !== action.payload.id);
     }
-    case ActionType.increaseAmount: {
+    case ActionType.INCREASEAMOUNT: {
       const updatedCart = cart.map((p: CartProduct) => {
         if (p.id !== action.payload.id) {
           return p;
@@ -34,7 +34,7 @@ export const cartReducer = (
       });
       return updatedCart;
     }
-    case ActionType.decreaseAmount: {
+    case ActionType.DECREASEAMOUNT: {
       const updatedCart = cart.map((p: CartProduct) => {
         if (
           p.id !== action.payload.id ||

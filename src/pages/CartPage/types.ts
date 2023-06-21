@@ -7,10 +7,10 @@ export type CartProduct = {
 };
 
 export enum ActionType {
-  add = "add",
-  remove = "remove",
-  increaseAmount = "increase-amount",
-  decreaseAmount = "decrease-amount",
+  ADD = "add",
+  REMOVE = "remove",
+  INCREASEAMOUNT = "increase-amount",
+  DECREASEAMOUNT = "decrease-amount",
 }
 
 export interface ActionRemovePayload {
@@ -28,21 +28,21 @@ export interface ActionDecreaseAmountPayload {
 }
 
 export interface ActionAdd {
-  type: ActionType.add;
+  type: ActionType.ADD;
   payload: CartProduct;
 }
 
 export interface ActionRemove {
-  type: ActionType.remove;
+  type: ActionType.REMOVE;
   payload: ActionRemovePayload;
 }
 
 export interface ActionIncreaseAmount {
-  type: ActionType.increaseAmount;
+  type: ActionType.INCREASEAMOUNT;
   payload: ActionIncreaseAmountPayload;
 }
 
 export interface ActionDecreaseAmount {
-  type: ActionType.decreaseAmount;
+  type: ActionType.DECREASEAMOUNT;
   payload: ActionDecreaseAmountPayload;
 }

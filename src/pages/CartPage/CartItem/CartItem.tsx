@@ -10,7 +10,12 @@ import styles from "./CartItem.module.scss";
 
 const CartItem = (product: CartProduct) => {
   const { id, title, image, price, amount } = product;
-  const { removeItem } = useCart();
+  const { removeItem, increaseAmount, decreaseAmount } = useCart();
+
+  const productItem = {
+    id,
+    amount,
+  };
 
   return (
     <li className={styles["cart-item"]}>
@@ -25,7 +30,11 @@ const CartItem = (product: CartProduct) => {
           <h5>$ {price}</h5>
         </Grid>
         <Grid xs={3} sm={2}>
-          <CartCounter id={id} amount={amount} />
+          <CartCounter
+            currentValue={amount}
+            onIncrease={() => increaseAmount(productItem)}
+            onDecrease={() => decreaseAmount(productItem)}
+          />
         </Grid>
         <Grid
           xs={1}

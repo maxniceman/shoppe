@@ -21,10 +21,10 @@ export const loader: LoaderFunction = async ({ params }) => {
 const ProductPage = () => {
   const { id, image, title, price, description } = useLoaderData() as Product;
 
-  const { cart, addItem } = useCart();
-  const isProductInCart = !!cart.find((product) => product.id === id);
-  const productInCart = cart.find((product) => product.id === id);
+  const { cart, addItem, increaseAmount, decreaseAmount } = useCart();
   const [initialAmount, setInitialAmount] = useState(1);
+  const isProductInCart = cart.some((product) => product.id === id);
+  const productInCart = cart.find((product) => product.id === id);
 
   let amount: number | undefined = isProductInCart
     ? productInCart?.amount
@@ -38,6 +38,29 @@ const ProductPage = () => {
       image,
       amount: amount || initialAmount,
     });
+  };
+
+  const incAmountPayload = () => {
+    if (!amount) return;
+    increaseAmount({
+      id,
+      amount: isProductInCart ? amount : initialAmount,
+    });
+  };
+
+  const decAmountPayload = () => {
+    if (!amount) return;
+    decreaseAmount({
+      id,
+      amount: isProductInCart ? amount : initialAmount,
+    });
+  };
+  const incCounter = () => {
+    setInitialAmount(initialAmount + 1);
+  };
+
+  const decCounter = () => {
+    if (initialAmount > 1) setInitialAmount(initialAmount - 1);
   };
 
   return (
@@ -58,9 +81,9 @@ const ProductPage = () => {
             <Grid container spacing={2}>
               <Grid xs={4} md={3}>
                 <CartCounter
-                  id={id}
-                  amount={amount || initialAmount}
-                  setAmountBeforeAddToCart={setInitialAmount}
+                  currentValue={amount || initialAmount}
+                  onIncrease={isProductInCart ? incAmountPayload : incCounter}
+                  onDecrease={isProductInCart ? decAmountPayload : decCounter}
                 />
               </Grid>
               <Grid xs={8} md={9}>

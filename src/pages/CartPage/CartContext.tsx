@@ -28,28 +28,28 @@ export const CartProvider = ({ children }: PropsWithChildren) => {
 
   const addItem = (payload: CartProduct) => {
     dispatch({
-      type: ActionType.add,
+      type: ActionType.ADD,
       payload: payload,
     });
   };
 
   const removeItem = (id: number) => {
     dispatch({
-      type: ActionType.remove,
+      type: ActionType.REMOVE,
       payload: { id },
     });
   };
 
   const increaseAmount = (payload: ActionIncreaseAmountPayload) => {
     dispatch({
-      type: ActionType.increaseAmount,
+      type: ActionType.INCREASEAMOUNT,
       payload: payload,
     });
   };
 
   const decreaseAmount = (payload: ActionDecreaseAmountPayload) => {
     dispatch({
-      type: ActionType.decreaseAmount,
+      type: ActionType.DECREASEAMOUNT,
       payload: payload,
     });
   };
