@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Grid container>
-        <Grid xs={6}>
+        <Grid xs={6} display="flex" alignItems="center">
           <Link to="/">
             <img src={logo} alt="Shoppe" />
           </Link>

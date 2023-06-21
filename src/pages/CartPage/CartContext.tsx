@@ -12,7 +12,7 @@ import {
 } from "./types";
 import { cartReducer } from "./cartReducer";
 
-interface createContextInterface {
+interface CreateContextInterface {
   cart: CartProduct[] | [];
   addItem: (payload: CartProduct) => void;
   removeItem: (id: number) => void;
@@ -21,7 +21,7 @@ interface createContextInterface {
 }
 
 export const initialCart: [] = [];
-export const CartContext = createContext({} as createContextInterface);
+export const CartContext = createContext({} as CreateContextInterface);
 
 export const CartProvider = ({ children }: PropsWithChildren) => {
   const [cart, dispatch] = useReducer(cartReducer, initialCart);

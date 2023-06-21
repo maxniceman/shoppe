@@ -23,10 +23,10 @@ const ProductPage = () => {
 
   const { cart, addItem, increaseAmount, decreaseAmount } = useCart();
   const [initialAmount, setInitialAmount] = useState(1);
-  const isProductInCart = cart.some((product) => product.id === id);
   const productInCart = cart.find((product) => product.id === id);
+  const isProductInCart = !!productInCart;
 
-  let amount: number | undefined = isProductInCart
+  const amount: number = isProductInCart
     ? productInCart?.amount
     : initialAmount;
 
@@ -41,7 +41,6 @@ const ProductPage = () => {
   };
 
   const incAmountPayload = () => {
-    if (!amount) return;
     increaseAmount({
       id,
       amount: isProductInCart ? amount : initialAmount,
@@ -49,7 +48,6 @@ const ProductPage = () => {
   };
 
   const decAmountPayload = () => {
-    if (!amount) return;
     decreaseAmount({
       id,
       amount: isProductInCart ? amount : initialAmount,
@@ -87,9 +85,11 @@ const ProductPage = () => {
                 />
               </Grid>
               <Grid xs={8} md={9}>
-                <Button fullWidth variant="outlined" onClick={addToCart}>
-                  add to cart
-                </Button>
+                {!isProductInCart && (
+                  <Button fullWidth variant="outlined" onClick={addToCart}>
+                    add to cart
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </>

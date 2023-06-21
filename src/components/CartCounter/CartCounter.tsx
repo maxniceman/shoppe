@@ -4,7 +4,7 @@ import { Add, Remove } from "@mui/icons-material";
 
 import styles from "./CartCounter.module.scss";
 
-interface CartCounterInterface {
+interface CartCounterProps {
   currentValue: number;
   onIncrease: () => void;
   onDecrease: () => void;
@@ -14,7 +14,7 @@ const CartCounter = ({
   currentValue,
   onIncrease,
   onDecrease,
-}: CartCounterInterface) => {
+}: CartCounterProps) => {
   return (
     <div className={styles["cart-counter"]}>
       <Grid container spacing={0}>
