@@ -9,14 +9,15 @@ import {
 } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 
-import { useCart } from "../../../pages/CartPage/CartContext";
+import { RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
 
 import styles from "./Header.module.scss";
 import logo from "../../../assets/logo.svg";
 
 const Header = () => {
+  const { cart } = useSelector((state: RootState) => state.cart);
   const navigate = useNavigate();
-  const { cart } = useCart();
 
   return (
     <header className={styles.header}>

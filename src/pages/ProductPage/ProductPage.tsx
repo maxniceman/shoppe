@@ -2,12 +2,15 @@ import { LoaderFunction } from "react-router-dom";
 import { useState } from "react";
 
 import Grid from "@mui/material/Unstable_Grid2";
-import { FavoriteBorder } from "@mui/icons-material";
-import Button from "@mui/material/Button";
+import { FavoriteBorder, FavoriteOutlined } from "@mui/icons-material";
+import { IconButton, Button, Stack } from "@mui/material";
 import CartCounter from "../../components/CartCounter/CartCounter";
 import { useLoaderData } from "react-router";
 import { getProduct } from "../service";
-import { useCart } from "../CartPage/CartContext";
+
+import type { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
+import { useActions } from "../../hooks/useActions";
 
 import styles from "./ProductPage.module.scss";
 
@@ -20,9 +23,12 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 const ProductPage = () => {
   const { id, image, title, price, description } = useLoaderData() as Product;
+  const { favorites } = useSelector((state: RootState) => state.favorites);
+  const isFavorite = favorites.some((f) => f.id === id);
+  const { toggleFavorites, add, decreaseAmount, increaseAmount } = useActions();
 
-  const { cart, addItem, increaseAmount, decreaseAmount } = useCart();
   const [initialAmount, setInitialAmount] = useState(1);
+  const { cart } = useSelector((state: RootState) => state.cart);
   const productInCart = cart.find((product) => product.id === id);
   const isProductInCart = !!productInCart;
 
@@ -31,7 +37,7 @@ const ProductPage = () => {
     : initialAmount;
 
   const addToCart = () => {
-    addItem({
+    add({
       id,
       price,
       title,
@@ -46,7 +52,6 @@ const ProductPage = () => {
       amount: isProductInCart ? amount : initialAmount,
     });
   };
-
   const decAmountPayload = () => {
     decreaseAmount({
       id,
@@ -56,7 +61,6 @@ const ProductPage = () => {
   const incCounter = () => {
     setInitialAmount(initialAmount + 1);
   };
-
   const decCounter = () => {
     if (initialAmount > 1) setInitialAmount(initialAmount - 1);
   };
@@ -70,9 +74,12 @@ const ProductPage = () => {
           </div>
         </Grid>
         <Grid xs={12} sm={7} md={6}>
-          <h1>
-            <FavoriteBorder /> {title}
-          </h1>
+          <Stack direction="row" spacing={1}>
+            <IconButton onClick={() => toggleFavorites({ id, title, image })}>
+              {isFavorite ? <FavoriteOutlined /> : <FavoriteBorder />}
+            </IconButton>
+            <h1>{title}</h1>
+          </Stack>
           <h2>$ {price}</h2>
           <h3>{description}</h3>
           <>

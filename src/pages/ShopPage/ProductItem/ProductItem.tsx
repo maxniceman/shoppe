@@ -1,17 +1,26 @@
 import { useNavigate } from "react-router-dom";
-import { Visibility, ShoppingCart, FavoriteBorder } from "@mui/icons-material";
+import {
+  Visibility,
+  ShoppingCart,
+  FavoriteBorder,
+  FavoriteOutlined,
+} from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Unstable_Grid2";
 
-import { useCart } from "../../CartPage/CartContext";
+import { useSelector } from "react-redux";
+import { useActions } from "../../../hooks/useActions";
+import { RootState } from "../../../store/store";
 
 import styles from "./ProductItem.module.scss";
 import { Product } from "../../types";
 
 const ProductItem = (props: Product) => {
   const { title, image, id, price } = props;
-  const { addItem } = useCart();
+  const { favorites } = useSelector((state: RootState) => state.favorites);
+  const isFavorite = favorites.some((f) => f.id === id);
   const navigate = useNavigate();
+  const { add, toggleFavorites } = useActions();
 
   const item = {
     id,
@@ -28,7 +37,7 @@ const ProductItem = (props: Product) => {
           <div className={styles["img-box"]}>
             <img src={image} alt={title}></img>
             <div className={styles.actions}>
-              <IconButton onClick={() => addItem(item)}>
+              <IconButton onClick={() => add(item)}>
                 <ShoppingCart />
               </IconButton>
               <IconButton
@@ -38,8 +47,8 @@ const ProductItem = (props: Product) => {
               >
                 <Visibility />
               </IconButton>
-              <IconButton>
-                <FavoriteBorder />
+              <IconButton onClick={() => toggleFavorites({ id, title, image })}>
+                {isFavorite ? <FavoriteOutlined /> : <FavoriteBorder />}
               </IconButton>
             </div>
           </div>

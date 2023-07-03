@@ -5,6 +5,7 @@ import ShopPage from "./ShopPage/ShopPage";
 import ErrorPage from "./ErrorPage/ErrorPage";
 import ProductPage from "./ProductPage/ProductPage";
 import CartPage from "./CartPage/CartPage";
+import FavoritesPage from "./FavoritesPage/FavoritesPage";
 
 import { loader as productsLoader } from "./ShopPage/ShopPage";
 import { loader as productLoader } from "./ProductPage/ProductPage";
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "favorites",
+        element: <FavoritesPage />,
       },
     ],
   },

@@ -1,11 +1,12 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import CartList from "./CartList/CartList";
-import { useCart } from "./CartContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 import styles from "./CartPage.module.scss";
 
 const CartPage = () => {
-  const { cart } = useCart();
+  const { cart } = useSelector((state: RootState) => state.cart);
 
   return (
     <div className={styles["cart-page"]}>
