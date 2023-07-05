@@ -8,9 +8,8 @@ import CartCounter from "../../components/CartCounter/CartCounter";
 import { useLoaderData } from "react-router";
 import { getProduct } from "../service";
 
-import type { RootState } from "../../store/store";
-import { useSelector } from "react-redux";
-import { useActions } from "../../hooks/useActions";
+import { useCartStore } from "../../hooks/useCartStore";
+import { useFavoriteStore } from "../../hooks/useFavoriteStore";
 
 import styles from "./ProductPage.module.scss";
 
@@ -23,12 +22,11 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 const ProductPage = () => {
   const { id, image, title, price, description } = useLoaderData() as Product;
-  const { favorites } = useSelector((state: RootState) => state.favorites);
-  const isFavorite = favorites.some((f) => f.id === id);
-  const { toggleFavorites, add, decreaseAmount, increaseAmount } = useActions();
+  const { checkIfProductInFavorites, toggleFavorites } = useFavoriteStore();
+
+  const { cart, addProduct, decreaseAmount, increaseAmount } = useCartStore();
 
   const [initialAmount, setInitialAmount] = useState(1);
-  const { cart } = useSelector((state: RootState) => state.cart);
   const productInCart = cart.find((product) => product.id === id);
   const isProductInCart = !!productInCart;
 
@@ -37,7 +35,7 @@ const ProductPage = () => {
     : initialAmount;
 
   const addToCart = () => {
-    add({
+    addProduct({
       id,
       price,
       title,
@@ -76,7 +74,11 @@ const ProductPage = () => {
         <Grid xs={12} sm={7} md={6}>
           <Stack direction="row" spacing={1}>
             <IconButton onClick={() => toggleFavorites({ id, title, image })}>
-              {isFavorite ? <FavoriteOutlined /> : <FavoriteBorder />}
+              {checkIfProductInFavorites(id) ? (
+                <FavoriteOutlined />
+              ) : (
+                <FavoriteBorder />
+              )}
             </IconButton>
             <h1>{title}</h1>
           </Stack>

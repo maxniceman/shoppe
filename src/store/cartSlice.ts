@@ -10,14 +10,16 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<CartProduct>) => {
-      const index = state.cart.findIndex((c) => c.id === action.payload.id);
-      if (index !== -1) return;
+    addProduct: (state, action: PayloadAction<CartProduct>) => {
+      const isAlreadyInCart = state.cart.some(
+        (c) => c.id === action.payload.id
+      );
+      if (isAlreadyInCart) return;
       else state.cart.push(action.payload);
     },
-    remove: (state, action: PayloadAction<{ id: number }>) => {
+    removeProduct: (state, action: PayloadAction<{ id: number }>) => {
       const index = state.cart.findIndex((c) => c.id === action.payload.id);
-      state.cart.splice(index, 1);
+      if (index !== -1) state.cart.splice(index, 1);
     },
     increaseAmount: (
       state,

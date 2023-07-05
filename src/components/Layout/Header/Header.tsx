@@ -9,14 +9,13 @@ import {
 } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 
-import { RootState } from "../../../store/store";
-import { useSelector } from "react-redux";
+import { useCartStore } from "../../../hooks/useCartStore";
 
 import styles from "./Header.module.scss";
 import logo from "../../../assets/logo.svg";
 
 const Header = () => {
-  const { cart } = useSelector((state: RootState) => state.cart);
+  const { cart } = useCartStore();
   const navigate = useNavigate();
 
   return (

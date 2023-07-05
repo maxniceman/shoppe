@@ -16,10 +16,10 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     toggleFavorites: (state, action: PayloadAction<FavoriteProduct>) => {
-      const index = state.favorites.findIndex(
+      const indexOfProduct = state.favorites.findIndex(
         (f) => f.id === action.payload.id
       );
-      if (index !== -1) state.favorites.splice(index, 1);
+      if (indexOfProduct !== -1) state.favorites.splice(indexOfProduct, 1);
       else state.favorites.push(action.payload);
     },
   },

@@ -8,19 +8,18 @@ import {
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Unstable_Grid2";
 
-import { useSelector } from "react-redux";
-import { useActions } from "../../../hooks/useActions";
-import { RootState } from "../../../store/store";
+import { useFavoriteStore } from "../../../hooks/useFavoriteStore";
+import { useCartStore } from "../../../hooks/useCartStore";
 
 import styles from "./ProductItem.module.scss";
 import { Product } from "../../types";
 
 const ProductItem = (props: Product) => {
   const { title, image, id, price } = props;
-  const { favorites } = useSelector((state: RootState) => state.favorites);
-  const isFavorite = favorites.some((f) => f.id === id);
   const navigate = useNavigate();
-  const { add, toggleFavorites } = useActions();
+
+  const { checkIfProductInFavorites, toggleFavorites } = useFavoriteStore();
+  const { addProduct } = useCartStore();
 
   const item = {
     id,
@@ -37,7 +36,7 @@ const ProductItem = (props: Product) => {
           <div className={styles["img-box"]}>
             <img src={image} alt={title}></img>
             <div className={styles.actions}>
-              <IconButton onClick={() => add(item)}>
+              <IconButton onClick={() => addProduct(item)}>
                 <ShoppingCart />
               </IconButton>
               <IconButton
@@ -48,7 +47,11 @@ const ProductItem = (props: Product) => {
                 <Visibility />
               </IconButton>
               <IconButton onClick={() => toggleFavorites({ id, title, image })}>
-                {isFavorite ? <FavoriteOutlined /> : <FavoriteBorder />}
+                {checkIfProductInFavorites(id) ? (
+                  <FavoriteOutlined />
+                ) : (
+                  <FavoriteBorder />
+                )}
               </IconButton>
             </div>
           </div>

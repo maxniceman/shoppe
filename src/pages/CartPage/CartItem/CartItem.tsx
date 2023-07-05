@@ -4,13 +4,13 @@ import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import CartCounter from "../../../components/CartCounter/CartCounter";
 import { CartProduct } from "../types";
-import { useActions } from "../../../hooks/useActions";
+import { useCartStore } from "../../../hooks/useCartStore";
 
 import styles from "./CartItem.module.scss";
 
 const CartItem = (product: CartProduct) => {
   const { id, title, image, price, amount } = product;
-  const { remove, increaseAmount, decreaseAmount } = useActions();
+  const { removeProduct, increaseAmount, decreaseAmount } = useCartStore();
 
   const productItem = {
     id,
@@ -42,7 +42,7 @@ const CartItem = (product: CartProduct) => {
           justifyContent="flex-end"
           alignItems="flex-start"
         >
-          <IconButton onClick={() => remove({ id })}>
+          <IconButton onClick={() => removeProduct({ id })}>
             <Close />
           </IconButton>
         </Grid>
