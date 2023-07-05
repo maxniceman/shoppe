@@ -3,14 +3,14 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import CartCounter from "../../../components/CartCounter/CartCounter";
-import { useCart } from "../CartContext";
 import { CartProduct } from "../types";
+import { useCartStore } from "../../../hooks/useCartStore";
 
 import styles from "./CartItem.module.scss";
 
 const CartItem = (product: CartProduct) => {
   const { id, title, image, price, amount } = product;
-  const { removeItem, increaseAmount, decreaseAmount } = useCart();
+  const { removeProduct, increaseAmount, decreaseAmount } = useCartStore();
 
   const productItem = {
     id,
@@ -42,7 +42,7 @@ const CartItem = (product: CartProduct) => {
           justifyContent="flex-end"
           alignItems="flex-start"
         >
-          <IconButton onClick={() => removeItem(id)}>
+          <IconButton onClick={() => removeProduct({ id })}>
             <Close />
           </IconButton>
         </Grid>

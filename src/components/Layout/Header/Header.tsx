@@ -9,14 +9,14 @@ import {
 } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 
-import { useCart } from "../../../pages/CartPage/CartContext";
+import { useCartStore } from "../../../hooks/useCartStore";
 
 import styles from "./Header.module.scss";
 import logo from "../../../assets/logo.svg";
 
 const Header = () => {
+  const { cart } = useCartStore();
   const navigate = useNavigate();
-  const { cart } = useCart();
 
   return (
     <header className={styles.header}>

@@ -1,11 +1,11 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import CartList from "./CartList/CartList";
-import { useCart } from "./CartContext";
+import { useCartStore } from "../../hooks/useCartStore";
 
 import styles from "./CartPage.module.scss";
 
 const CartPage = () => {
-  const { cart } = useCart();
+  const { cart } = useCartStore();
 
   return (
     <div className={styles["cart-page"]}>
