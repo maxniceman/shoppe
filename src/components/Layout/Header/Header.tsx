@@ -22,7 +22,7 @@ const Header = () => {
   const [accountDropdown, setAccountDropdown] =
     React.useState<null | HTMLElement>(null);
   const open = Boolean(accountDropdown);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDropdown = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAccountDropdown(event.currentTarget);
   };
   const handleClose = () => {
@@ -52,7 +52,7 @@ const Header = () => {
                 <ShoppingCartOutlined />
               )}
             </IconButton>
-            <IconButton onClick={handleClick}>
+            <IconButton onClick={handleDropdown}>
               <Person />
             </IconButton>
             <Menu
