@@ -1,7 +1,8 @@
+import * as React from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import Grid from "@mui/material/Unstable_Grid2";
-import { Badge, Stack } from "@mui/material";
+import { Badge, Menu, MenuItem, Stack } from "@mui/material";
 import {
   Person,
   ShoppingCart,
@@ -17,6 +18,20 @@ import logo from "../../../assets/logo.svg";
 const Header = () => {
   const { cart } = useCartStore();
   const navigate = useNavigate();
+
+  const [accountDropdown, setAccountDropdown] =
+    React.useState<null | HTMLElement>(null);
+  const open = Boolean(accountDropdown);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAccountDropdown(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAccountDropdown(null);
+  };
+  const handleFavorites = () => {
+    navigate("/favorites");
+    setAccountDropdown(null);
+  };
 
   return (
     <header className={styles.header}>
@@ -37,9 +52,18 @@ const Header = () => {
                 <ShoppingCartOutlined />
               )}
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleClick}>
               <Person />
             </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={accountDropdown}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleFavorites}>Favorites</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
           </Stack>
         </Grid>
       </Grid>
