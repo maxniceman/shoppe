@@ -7,13 +7,13 @@ interface FavoriteProduct {
   image: string;
 }
 
-const favoritesInLocalStorage =
-  localStorage.getItem("favorites") !== null
-    ? JSON.parse(localStorage.getItem("favorites")!)
-    : [];
+const localStorageFavorites = localStorage.getItem("favorites");
+const initialFavoritesData = !!localStorageFavorites
+  ? JSON.parse(localStorageFavorites)
+  : [];
 
 const initialState: { favorites: FavoriteProduct[] } = {
-  favorites: favoritesInLocalStorage,
+  favorites: initialFavoritesData,
 };
 
 export const favoritesSlice = createSlice({

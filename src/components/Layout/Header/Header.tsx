@@ -22,13 +22,13 @@ const Header = () => {
   const [accountDropdown, setAccountDropdown] =
     React.useState<null | HTMLElement>(null);
   const open = Boolean(accountDropdown);
-  const handleDropdown = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAccountDropdown(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAccountDropdown(null);
   };
-  const handleFavorites = () => {
+  const handleFavoritesClick = () => {
     navigate("/favorites");
     setAccountDropdown(null);
   };
@@ -52,17 +52,17 @@ const Header = () => {
                 <ShoppingCartOutlined />
               )}
             </IconButton>
-            <IconButton onClick={handleDropdown}>
+            <IconButton onClick={handleOpenMenu}>
               <Person />
             </IconButton>
             <Menu
               id="basic-menu"
               anchorEl={accountDropdown}
               open={open}
-              onClose={handleClose}
+              onClose={handleCloseMenu}
             >
-              <MenuItem onClick={handleFavorites}>Favorites</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleFavoritesClick}>Favorites</MenuItem>
+              <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
             </Menu>
           </Stack>
         </Grid>
