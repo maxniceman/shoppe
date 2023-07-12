@@ -7,8 +7,13 @@ interface FavoriteProduct {
   image: string;
 }
 
+const localStorageFavorites = localStorage.getItem("favorites");
+const initialFavoritesData = !!localStorageFavorites
+  ? JSON.parse(localStorageFavorites)
+  : [];
+
 const initialState: { favorites: FavoriteProduct[] } = {
-  favorites: [],
+  favorites: initialFavoritesData,
 };
 
 export const favoritesSlice = createSlice({
@@ -16,11 +21,19 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     toggleFavorites: (state, action: PayloadAction<FavoriteProduct>) => {
+      const updLocalStorage = () =>
+        localStorage.setItem("favorites", JSON.stringify(state.favorites));
+
       const indexOfProduct = state.favorites.findIndex(
         (f) => f.id === action.payload.id
       );
-      if (indexOfProduct !== -1) state.favorites.splice(indexOfProduct, 1);
-      else state.favorites.push(action.payload);
+      if (indexOfProduct !== -1) {
+        state.favorites.splice(indexOfProduct, 1);
+        updLocalStorage();
+      } else {
+        state.favorites.push(action.payload);
+        updLocalStorage();
+      }
     },
   },
 });

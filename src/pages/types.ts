@@ -11,3 +11,9 @@ export interface Product {
   description: string;
   amount?: number;
 }
+
+export interface FavoriteProduct {
+  id: number;
+  title: string;
+  image: string;
+}
