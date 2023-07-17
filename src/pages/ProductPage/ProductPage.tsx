@@ -13,7 +13,7 @@ import { useFavoriteStore } from "../../hooks/useFavoriteStore";
 
 import styles from "./ProductPage.module.scss";
 
-import { Product } from "../types";
+import { FavoriteProduct, Product } from "../types";
 
 export const loader: LoaderFunction = async ({ params }) => {
   if (!params.productId) throw new Error();
@@ -27,7 +27,9 @@ const ProductPage = () => {
   const { cart, addProduct, decreaseAmount, increaseAmount } = useCartStore();
 
   const [initialAmount, setInitialAmount] = useState(1);
-  const productInCart = cart.find((product) => product.id === id);
+  const productInCart = cart.find(
+    (product: FavoriteProduct) => product.id === id
+  );
   const isProductInCart = !!productInCart;
 
   const amount: number = isProductInCart

@@ -1,7 +1,7 @@
 import { bindActionCreators } from "@reduxjs/toolkit";
 import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actions } from "../store/favoritesSlice";
+import { FavoriteProduct, actions } from "../store/favoritesSlice";
 import { RootState } from "../store/store";
 
 export const useFavoriteStore = () => {
@@ -11,7 +11,7 @@ export const useFavoriteStore = () => {
 
   const checkIfProductInFavorites = useCallback(
     (id: number) => {
-      return favorites.some((f) => f.id === id);
+      return favorites.some((f: FavoriteProduct) => f.id === id);
     },
     [favorites]
   );
