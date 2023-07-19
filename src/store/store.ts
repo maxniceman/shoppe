@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import favoritesReducer from "./favoritesSlice";
-import cartReducer from "./cartSlice";
-import { favoritesMiddleware } from "./favoritesMiddleware";
+import favoritesReducer from "./favorites/favoritesSlice";
+import cartReducer from "./cart/cartSlice";
+import { favoritesMiddleware } from "./favorites/favoritesMiddleware";
 
 export const store = configureStore({
   reducer: {

@@ -7,7 +7,6 @@ import { Alert, AlertTitle } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 import styles from "./FavoritesPage.module.scss";
-import { FavoriteProduct } from "../types";
 
 const FavoritesPage = () => {
   const { favorites } = useFavoriteStore();
@@ -24,7 +23,7 @@ const FavoritesPage = () => {
     <div className={styles.favorites}>
       {favorites.length > 0 && (
         <Grid container>
-          {favorites.map((product: FavoriteProduct) => {
+          {favorites.map((product) => {
             return <FavoriteItem key={product.id} {...product} />;
           })}
         </Grid>
