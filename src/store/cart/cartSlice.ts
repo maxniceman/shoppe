@@ -1,41 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CartProduct } from "../pages/CartPage/types";
+import { CartProduct } from "../../pages/CartPage/types";
 
-const initialState: { cart: CartProduct[] } = {
-  cart: [],
-};
+const initialState: CartProduct[] = [];
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<CartProduct>) => {
-      const isAlreadyInCart = state.cart.some(
-        (c) => c.id === action.payload.id
-      );
+    addProduct: (cart, action: PayloadAction<CartProduct>) => {
+      const isAlreadyInCart = cart.some((c) => c.id === action.payload.id);
       if (isAlreadyInCart) return;
-      else state.cart.push(action.payload);
+      else cart.push(action.payload);
     },
-    removeProduct: (state, action: PayloadAction<{ id: number }>) => {
-      const index = state.cart.findIndex((c) => c.id === action.payload.id);
-      if (index !== -1) state.cart.splice(index, 1);
+    removeProduct: (cart, action: PayloadAction<{ id: number }>) => {
+      const index = cart.findIndex((c) => c.id === action.payload.id);
+      if (index !== -1) cart.splice(index, 1);
     },
     increaseAmount: (
-      state,
+      cart,
       action: PayloadAction<{ id: number; amount: number }>
     ) => {
-      state.cart.forEach((p: CartProduct) => {
+      cart.forEach((p: CartProduct) => {
         if (p.id === action.payload.id) {
           p.amount++;
         }
       });
     },
     decreaseAmount: (
-      state,
+      cart,
       action: PayloadAction<{ id: number; amount: number }>
     ) => {
-      state.cart.forEach((p: CartProduct) => {
+      cart.forEach((p: CartProduct) => {
         if (p.id === action.payload.id && action.payload.amount !== 1) {
           p.amount--;
         }

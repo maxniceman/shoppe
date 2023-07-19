@@ -10,6 +10,14 @@ import styles from "./FavoritesPage.module.scss";
 
 const FavoritesPage = () => {
   const { favorites } = useFavoriteStore();
+  if (!favorites.length) {
+    return (
+      <Alert icon={<DiamondOutlined fontSize="inherit" />} severity="warning">
+        <AlertTitle>There aren't any favorite products</AlertTitle>
+        Please explore the <Link to="/">products page</Link>
+      </Alert>
+    );
+  }
 
   return (
     <div className={styles.favorites}>
@@ -19,12 +27,6 @@ const FavoritesPage = () => {
             return <FavoriteItem key={product.id} {...product} />;
           })}
         </Grid>
-      )}
-      {!favorites.length && (
-        <Alert icon={<DiamondOutlined fontSize="inherit" />} severity="warning">
-          <AlertTitle>There aren't any favorite products</AlertTitle>
-          Please explore the <Link to="/">products page</Link>
-        </Alert>
       )}
     </div>
   );
