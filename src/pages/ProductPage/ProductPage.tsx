@@ -1,27 +1,43 @@
-import { LoaderFunction } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Grid from "@mui/material/Unstable_Grid2";
 import { FavoriteBorder, FavoriteOutlined } from "@mui/icons-material";
 import { IconButton, Button, Stack } from "@mui/material";
 import CartCounter from "../../components/CartCounter/CartCounter";
-import { useLoaderData } from "react-router";
-import { getProduct } from "../service";
 
+import { BACKEND_BASE_URL, PRODUCTS_PATH } from "../../constants";
 import { useCartStore } from "../../hooks/useCartStore";
 import { useFavoriteStore } from "../../hooks/useFavoriteStore";
+import { useFetch } from "../../hooks/useFetch";
+
+import Spinner from "../../components/Spinner/Spinner";
+import ErrorPanel from "../../components/ErrorPanel/ErrorPanel";
 
 import styles from "./ProductPage.module.scss";
-
 import { Product } from "../types";
 
-export const loader: LoaderFunction = async ({ params }) => {
-  if (!params.productId) throw new Error();
-  return await Promise.resolve(getProduct(params.productId as string));
-};
-
 const ProductPage = () => {
-  const { id, image, title, price, description } = useLoaderData() as Product;
+  const { productId } = useParams();
+  const [product, setProduct] = useState({});
+  const { response, error, isLoading, fetchData } = useFetch(
+    `${BACKEND_BASE_URL}${PRODUCTS_PATH}/${productId}`
+  );
+  let ignore = false;
+  useEffect(() => {
+    if (!ignore) fetchData();
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (response !== null) {
+      setProduct(response);
+    }
+  }, [response]);
+
+  const { id, image, title, price, description } = product as Product;
   const { checkIfProductInFavorites, toggleFavorites } = useFavoriteStore();
 
   const { cart, addProduct, decreaseAmount, increaseAmount } = useCartStore();
@@ -62,6 +78,9 @@ const ProductPage = () => {
   const decCounter = () => {
     if (initialAmount > 1) setInitialAmount(initialAmount - 1);
   };
+
+  if (error) return <ErrorPanel error={error["message"]} />;
+  if (isLoading) return <Spinner />;
 
   return (
     <div className={styles.product}>
