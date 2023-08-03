@@ -40,7 +40,7 @@ const ShopPage = () => {
     setPage((page) => page + 1);
   };
 
-  if (error) return <ErrorPanel error={error} />;
+  if (error) return <ErrorPanel error={error["message"]} />;
 
   return (
     <>

@@ -1,11 +1,13 @@
-//@ts-nocheck
 import { Alert, AlertTitle } from "@mui/material";
 import styles from "./ErrorPanel.module.scss";
 import { Link } from "react-router-dom";
 
-const ErrorPanel = (props) => {
+interface ErrorProps {
+  error: string | null;
+}
+
+const ErrorPanel = (props: ErrorProps) => {
   const { error } = props;
-  console.log(error);
   return (
     <div className={styles["error-panel"]}>
       <Alert severity="error">
