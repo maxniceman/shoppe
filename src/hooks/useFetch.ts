@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 interface Params {
   page: number;
@@ -11,9 +11,9 @@ export const useFetch = (url: string) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchData = async (params: Params | null = null) => {
+  const fetchData = (params?: Params) => {
     setIsLoading(true);
-    await axios
+    axios
       .get(`${url}`, { params })
       .then((res) => {
         setResponse(res.data);

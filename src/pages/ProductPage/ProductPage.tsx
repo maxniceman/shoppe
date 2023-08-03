@@ -10,6 +10,7 @@ import { BACKEND_BASE_URL, PRODUCTS_PATH } from "../../constants";
 import { useCartStore } from "../../hooks/useCartStore";
 import { useFavoriteStore } from "../../hooks/useFavoriteStore";
 import { useFetch } from "../../hooks/useFetch";
+import { useMountedState } from "react-use";
 
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorPanel from "../../components/ErrorPanel/ErrorPanel";
@@ -18,21 +19,18 @@ import styles from "./ProductPage.module.scss";
 import { Product } from "../types";
 
 const ProductPage = () => {
+  const isMounted = useMountedState();
   const { productId } = useParams();
   const [product, setProduct] = useState({});
   const { response, error, isLoading, fetchData } = useFetch(
     `${BACKEND_BASE_URL}${PRODUCTS_PATH}/${productId}`
   );
-  let ignore = false;
   useEffect(() => {
-    if (!ignore) fetchData();
-    return () => {
-      ignore = true;
-    };
+    fetchData();
   }, []);
 
   useEffect(() => {
-    if (response !== null) {
+    if (isMounted() && response !== null) {
       setProduct(response);
     }
   }, [response]);

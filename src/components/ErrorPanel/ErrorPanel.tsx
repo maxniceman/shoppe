@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const ErrorPanel = (props) => {
   const { error } = props;
+  console.log(error);
   return (
     <div className={styles["error-panel"]}>
       <Alert severity="error">

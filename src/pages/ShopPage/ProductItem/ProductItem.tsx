@@ -34,7 +34,6 @@ const ProductItem = (props: Product) => {
       <Grid xs={12} sm={6} md={4}>
         <div className={styles["product-item"]}>
           <div className={styles["img-box"]}>
-            {id}
             <img src={image} alt={title}></img>
             <div className={styles.actions}>
               <IconButton onClick={() => addProduct(item)}>

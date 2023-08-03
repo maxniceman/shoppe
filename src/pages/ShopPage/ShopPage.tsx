@@ -1,4 +1,3 @@
-//ts-nocheck
 import { useEffect, useState } from "react";
 import ProductList from "./ProductList/ProductList";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -41,7 +40,7 @@ const ShopPage = () => {
     setPage((page) => page + 1);
   };
 
-  if (error) return <ErrorPanel error={error["message"]} />;
+  if (error) return <ErrorPanel error={error} />;
 
   return (
     <>
