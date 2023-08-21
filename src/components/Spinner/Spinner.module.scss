@@ -1,3 +1,13 @@
 .spinner {
-  padding: 48px 0;
+  padding: 60px 0;
+  background: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  span {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
 }

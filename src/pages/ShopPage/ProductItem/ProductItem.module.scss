@@ -6,7 +6,9 @@
     position: relative;
     width: 100%;
     img {
-      width: 100%;
+      width: calc(100% - 20px);
+      margin: 20px auto 0;
+      display: block;
     }
     .actions {
       display: none;
@@ -26,11 +28,14 @@
       }
     }
   }
-  p {
-    margin-bottom: 16px;
-  }
-  .price {
-    color: #a18a68;
-    font-weight: normal;
+  .info {
+    margin: 0 10px;
+    p {
+      margin-bottom: 16px;
+    }
+    .price {
+      color: #a18a68;
+      font-weight: normal;
+    }
   }
 }
