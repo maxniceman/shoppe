@@ -30,36 +30,34 @@ const ProductItem = (props: Product) => {
   };
 
   return (
-    <>
-      <Grid xs={12} sm={6} md={4}>
-        <div className={styles["product-item"]}>
-          <div className={styles["img-box"]}>
-            <img src={image} alt={title}></img>
-            <div className={styles.actions}>
-              <IconButton onClick={() => addProduct(item)}>
-                <ShoppingCart />
-              </IconButton>
-              <IconButton
-                onClick={() => {
-                  navigate(`products/${id}`);
-                }}
-              >
-                <Visibility />
-              </IconButton>
-              <IconButton onClick={() => toggleFavorites({ id, title, image })}>
-                {checkIfProductInFavorites(id) ? (
-                  <FavoriteOutlined />
-                ) : (
-                  <FavoriteBorder />
-                )}
-              </IconButton>
-            </div>
-          </div>
-          <p>{title}</p>
-          <strong className={styles.price}>$ {price}</strong>
+    <div className={styles["product-item"]}>
+      <div className={styles["img-box"]}>
+        <img src={image} alt={title}></img>
+        <div className={styles.actions}>
+          <IconButton onClick={() => addProduct(item)}>
+            <ShoppingCart />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              navigate(`products/${id}`);
+            }}
+          >
+            <Visibility />
+          </IconButton>
+          <IconButton onClick={() => toggleFavorites({ id, title, image })}>
+            {checkIfProductInFavorites(id) ? (
+              <FavoriteOutlined />
+            ) : (
+              <FavoriteBorder />
+            )}
+          </IconButton>
         </div>
-      </Grid>
-    </>
+      </div>
+      <div className={styles.info}>
+        <p>{title}</p>
+        <strong className={styles.price}>$ {price}</strong>
+      </div>
+    </div>
   );
 };
 

@@ -17,3 +17,9 @@ export interface FavoriteProduct {
   title: string;
   image: string;
 }
+
+export enum ViewType {
+  Mobile = "mobile",
+  Tablet = "tablet",
+  Screen = "screen",
+}
